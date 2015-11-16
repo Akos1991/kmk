@@ -1,0 +1,19 @@
+<template name="header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{pathFor 'posts'}}">CommUnity</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          {{#if currentUser}}
+              <li><a href="{{pathFor 'userProfile'}}">Profile</a></li>
+              <li><a href="{{pathFor 'messages'}}">Messages</a></li>
+              <li><a href="#">Groups</a></li>
+          {{/if}}
+          {{> loginButtons}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>

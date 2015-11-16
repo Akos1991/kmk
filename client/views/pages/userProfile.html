@@ -1,0 +1,43 @@
+<template name="userProfile">
+    <div class="user-details page container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Welcome <b>{{currentUser.profile.displayName}}</b></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Username:</th>
+                        <td>
+                            <input type="text" class="form-control" value="{{currentUser.username}}" disabled="disabled">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Display name:</th>
+                        <td>
+                            <input type="text" class="form-control" name="displayName" value="{{currentUser.profile.displayName}}" placeholder="Display name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">E-mail:</th>
+                        <td>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" value="{{currentUser.profile.email}}" placeholder="E-mail">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description:</th>
+                        <td>
+                            <textarea class="form-control" name="note" rows="5">{{currentUser.profile.note}}</textarea>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
