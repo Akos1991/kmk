@@ -1,43 +1,81 @@
 <template name="userProfile">
     <div class="user-details page container">
         <div class="row">
-            <div class="col-xs-12">
-                <h2>Editing profile</h2>
-            </div>
-        </div>
+            <div class="col-md-3">
+                    <h2>{{user.username}} profile</h2>
+                    {{#if hasFriendRequest}}
+                        <button class="btn btn-success confirm-friendship">Confirm friendship</button>
+                        <button class="btn btn-danger cancel-friendship">Cancel friendship request</button>
+                    {{else}}
+                        {{#if notMyProfile currentUser}}
+                            <button class="btn btn-primary add-friend">Add friend</button>
+                        {{/if}}
+                    {{/if}}
 
-        <div class="row">
-            <div class="col-md-6">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <th scope="row">Username:</th>
-                        <td>
-                            <input type="text" class="form-control" value="{{currentUser.username}}" disabled="disabled">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Display name:</th>
-                        <td>
-                            <input type="text" class="form-control" name="displayName" value="{{currentUser.profile.displayName}}" placeholder="Display name">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">E-mail:</th>
-                        <td>
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="email" value="{{currentUser.profile.email}}" placeholder="E-mail">
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Description:</th>
-                        <td>
-                            <textarea class="form-control" name="note" rows="5">{{currentUser.profile.note}}</textarea>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <h3>Friends:</h3>
+                    {{#each friends}}
+                        <p>
+                            <a href="{{pathFor 'userProfile' username=user.username}}">
+                                {{user.username}}
+                            </a>
+                        </p>
+                    {{else}}
+                        <p>No friends.</p>
+                    {{/each}}
+            </div>
+
+            <div class="col-md-3">
+                <div class="col-md-3">
+                    <br><br>
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Username:</th>
+                            <td>
+                                {{currentUser.username}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Real name:</th>
+                            <td>
+                                {{currentUser.profile.displayName}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Current home:</th>
+                            <td>
+                               {{currentUser.profile.place}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Birthplace/Birthdate:</th>
+                            <td>
+                                {{currentUser.profile.birth}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">E-mail:</th>
+                            <td>
+                                <div class="form-group">
+                                   {{currentUser.profile.email}}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Studies/Workplace:</th>
+                            <td>
+                                {{currentUser.profile.work}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Description:</th>
+                            <td>
+                                {{currentUser.profile.note}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

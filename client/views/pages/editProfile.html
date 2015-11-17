@@ -1,0 +1,62 @@
+<template name="editProfile">
+    <div class="user-details page container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>My profile</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Username:</th>
+                        <td>
+                            <input type="text" class="form-control" value="{{currentUser.username}}" disabled="disabled">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Real name:</th>
+                        <td>
+                            <input type="text" class="form-control" name="displayName" value="{{currentUser.profile.displayName}}" placeholder="Display name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Current home:</th>
+                        <td>
+                            <textarea class="form-control" name="place" rows="1">{{currentUser.profile.place}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Birthplace/Birthdate:</th>
+                        <td>
+                            <textarea class="form-control" name="birth" rows="1">{{currentUser.profile.birth}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">E-mail:</th>
+                        <td>
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="email" value="{{currentUser.profile.email}}" placeholder="E-mail">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Studies/Workplace:</th>
+                        <td>
+                            <textarea class="form-control" name="work" rows="2">{{currentUser.profile.work}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Description:</th>
+                        <td>
+                            <textarea class="form-control" name="note" rows="5">{{currentUser.profile.note}}</textarea>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

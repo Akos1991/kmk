@@ -30,6 +30,12 @@ Template.posts.helpers({
     getPosts: function() {
         return Posts.find({}, { sort: {createdAt: -1}});
     },
+    getUsername: function() {
+        var user = Meteor.users.findOne(this.userId);
+        if (user) {
+            return user.username;
+        }
+    },
     updatePost: function() {
         var id = this._id;
         return function (res, val) {

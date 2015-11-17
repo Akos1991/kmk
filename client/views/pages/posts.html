@@ -19,11 +19,9 @@
                     {{#each getPosts}}
                         <li>
                             <span class="username">
-                                <b>{{getDisplayName userId}}</b>
+                                <b><a href="{{pathFor 'userProfile' username=getUsername}}">{{getUsername}}</a></b>
                                 {{#if ownPost userId}}
-                                    <span class="remove"><a href="#"><span class="glyphicon glyphicon-remove"></span></a></span>
-                                    <span> | </span>
-                                    <span class="edit"><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></span>
+                                    <span class="remove"><a href="#">[<span class="glyphicon glyphicon-remove">]</span></a></span>
                                 {{/if}}
                             </span>
                             {{#if ownPost userId}}

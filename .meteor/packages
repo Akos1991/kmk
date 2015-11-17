@@ -25,3 +25,10 @@ mizzao:user-status
 natestrauser:x-editable-bootstrap
 workman:x-editable-reactive-template
 workman:meteor-editable
+easy:search
+socialize:friendships
+sergeyt:typeahead
+aldeed:collection2
+aldeed:autoform
+autopublish
+insecure

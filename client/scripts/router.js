@@ -33,7 +33,19 @@ Router.route('/messages', {
   }
 });
 
-Router.route('/userprofile', {
-  name:     'userProfile',
-  template: 'userProfile'
+Router.route('/editprofile', {
+  name:     'editProfile',
+  template: 'editProfile'
+});
+
+Router.route('/users/:username', {
+  name: 'userProfile',
+  waitOn: function() {
+    Meteor.subscribe('friendRequests');
+  },
+  data: function() {
+    return {
+      user: Meteor.users.findOne({ username: this.params.username })
+    };
+  }
 });
