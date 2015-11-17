@@ -8,7 +8,7 @@
                         <textarea class="form-control" name="post" rows="3" placeholder="Type your post here..."></textarea>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Post it</button>
+                        <button type="submit" class="btn btn-primary">Post</button>
                     </div>
                 </form>
             </div>
@@ -17,9 +17,20 @@
         <div align="center" class="row">
                 <ul class="list-unstyled">
                     {{#each getPosts}}
-                        <li class="{{ownPost userId}} {{applyDimEffect @index}}">
-                            <span class="username"><b>{{getDisplayName userId}}</b></span>
-                            <span class="post">{{post}}</span>
+                        <li>
+                            <span class="username">
+                                <b>{{getDisplayName userId}}</b>
+                                {{#if ownPost userId}}
+                                    <span class="remove"><a href="#"><span class="glyphicon glyphicon-remove"></span></a></span>
+                                    <span> | </span>
+                                    <span class="edit"><a href="#"><span class="glyphicon glyphicon-pencil"></span></a></span>
+                                {{/if}}
+                            </span>
+                            {{#if ownPost userId}}
+                                {{> xEditable type="text" success=updatePost placement="right" mode="inline" value=post }}
+                            {{else}}
+                                {{post}}
+                            {{/if}}
                         </li>
                     {{/each}}
                 </ul>

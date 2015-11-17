@@ -24,6 +24,18 @@ Meteor.methods({
             });
         }
     },
+   editPost: function(id,val) {
+        if(Meteor.user()) {
+            Posts.update({ _id: id }, { $set: { post: val } });
+        }
+    },
+    removePost: function(id) {
+        if(Meteor.user()) {
+            Posts.remove({
+                _id:  id,
+            });
+        }
+    },
     updateMsg: function(msg,session_id){
         if(Meteor.user()){
             Messages.update({"_id":session_id},{$push:{messages:{

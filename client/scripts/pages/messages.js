@@ -1,3 +1,5 @@
+Session.set('atConversation',false);
+
 Template.sidebar.helpers({
     onlineUsers:function(){
         return Meteor.users.find({ 'status.online': true , _id: {$ne: Meteor.userId()} });
@@ -9,7 +11,10 @@ Template.sidebar.helpers({
 
 Template.sidebar.events({
     'click .user':function(){
+        event.preventDefault();
+
         Session.set('currentId',this._id);
+        Session.set('atConversation',true);
 
         var res = Messages.findOne({chatIds:{$all:[this._id,Meteor.userId()]}});
         if(res)
@@ -28,7 +33,7 @@ Template.sidebar.events({
 Template.message.helpers({
     'msgs':function(){
         var result = Messages.findOne({'_id':Session.get('roomid')});
-        var result = result.messages.reverse();
+        result = result.messages.reverse();
         return result;
     },
     'ownMessage':function(msgUserName){
@@ -56,5 +61,12 @@ Template.input.events({
                 event.target.value = '';
             }
         }
+    }
+});
+
+Template.messages.events({
+    'getConvStarted': function(){
+        event.preventDefault();
+        return Session.get('bool');
     }
 });

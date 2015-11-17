@@ -1,24 +1,41 @@
 Template.posts.events({
     'submit form': function(event) {
         event.preventDefault();
-        Meteor.call('addPost', event.target.post.value);
-        event.target.post.value = '';
+        if(event.target.post.value !== '') {
+            Meteor.call('addPost', event.target.post.value);
+            event.target.post.value = '';
+        }
     },
     'keypress textarea': function(event) {
         if(event.keyCode == 13) {
             event.preventDefault();
-            Meteor.call('addPost', event.target.value);
-            event.target.value = '';
+            if(event.target.value !== ''){
+                Meteor.call('addPost', event.target.value);
+                event.target.value = '';
+            }
         }
+    },
+    'click .remove':function(event){
+        event.preventDefault();
+        Meteor.call('removePost',this._id);
+    },
+    'click .edit':function(event){
+        event.preventDefault();
+        $('#post .editable').editable('toggleDisabled');
     }
 });
 
-Template.posts.helpers({
 
+Template.posts.helpers({
     getPosts: function() {
         return Posts.find({}, { sort: {createdAt: -1}});
     },
-
+    updatePost: function() {
+        var id = this._id;
+        return function (res, val) {
+            Meteor.call('editPost',id,val);
+        }
+    },
     getDisplayName: function(userId) {
         var user = Meteor.users.findOne({_id: userId});
         if(user) {
@@ -26,23 +43,10 @@ Template.posts.helpers({
         }
         return 'A ghost...';
     },
-
     ownPost: function(postUserId) {
         if(Meteor.user() && Meteor.user()._id == postUserId) {
-            return 'own';
+            return true;
         }
-        return '';
-    },
-
-    applyDimEffect: function(index) {
-        if(index <= 4) {
-            return '';
-        } else if(index <= 6) {
-            return 'low-dim';
-        } else if(index <= 7){
-            return 'high-dim';
-        } else {
-            return 'hidden'
-        }
+        return false;
     }
 });

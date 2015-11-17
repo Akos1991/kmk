@@ -22,3 +22,6 @@ twbs:bootstrap
 accounts-password
 ian:accounts-ui-bootstrap-3
 mizzao:user-status
+natestrauser:x-editable-bootstrap
+workman:x-editable-reactive-template
+workman:meteor-editable
