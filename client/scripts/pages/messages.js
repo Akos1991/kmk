@@ -10,6 +10,7 @@ Template.sidebar.helpers({
 Template.sidebar.events({
     'click .user':function(){
         Session.set('currentId',this._id);
+
         var res = Messages.findOne({chatIds:{$all:[this._id,Meteor.userId()]}});
         if(res)
         {
@@ -18,7 +19,6 @@ Template.sidebar.events({
         }
         else{
             //conversation not exists
-            //Messages.insert({chatIds:[this._id , Meteor.userId()],messages:[]});
             var newRoom = Meteor.call('newMsg', this._id);
             Session.set('roomid',newRoom);
         }
@@ -27,8 +27,16 @@ Template.sidebar.events({
 
 Template.message.helpers({
     'msgs':function(){
-        var result = Messages.findOne({_id:Session.get('roomid')});
-        return result.messages;
+        var result = Messages.findOne({'_id':Session.get('roomid')});
+        var result = result.messages.reverse();
+        return result;
+    },
+    'ownMessage':function(msgUserName){
+        if(msgUserName == Meteor.user().username) {
+            return true;
+        }else{
+            return false;
+        }
     }
 });
 
